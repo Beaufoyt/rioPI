@@ -21,9 +21,9 @@ module.exports = (sequelize, DataType) => {
         },
     }, {
         classMethods: {
-            // associate: (models) => {
-                // Tasks.belongsTo(models.Users);
-            // },
+            associate: (models) => {
+                recipes.hasMany(models.ingredients, { sourceKey: 'id', foreignKey: 'recipeId' });
+            },
         },
     });
     return recipes;
