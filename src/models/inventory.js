@@ -9,17 +9,19 @@ module.exports = (sequelize, DataType) => {
         retailerId: { type: DataType.INTEGER(11) },
         nameEn: { type: DataType.STRING(255) },
         nameFr: { type: DataType.STRING(255) },
-        container: { type: DataType.ENUM('dropper-bottle','plastic-bag','glass-jar') },
         scientificName: { type: DataType.STRING(255) },
-        description: { type: DataType.STRING(512) },
+        descriptionEn: { type: DataType.STRING(1000) },
+        descriptionFr: { type: DataType.STRING(1000) },
         inStock: { type: DataType.TINYINT(1) },
     }, {
         freezeTableName: true,
         classMethods: {
             associate: (models) => {
                 inventory.belongsTo(models.retailers, { targetKey: 'id', foreignKey: 'retailerId' });
+                inventory.belongsTo(models.categories, { targetKey: 'id', foreignKey: 'categoryId' });
             },
         },
     });
+
     return inventory;
 };

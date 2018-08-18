@@ -36,7 +36,7 @@ if (!db) {
     Object.keys(db.models).forEach(key => {
         const { classMethods } = db.models[key].options;
 
-        if (classMethods.hasOwnProperty('associate')) {
+        if (classMethods && classMethods.hasOwnProperty('associate')) {
             classMethods.associate(db.models);
         }
     });

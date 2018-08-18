@@ -1,13 +1,13 @@
 module.exports = (sequelize, DataType) => {
-    const retailers = sequelize.define('retailers', {
+    const categories = sequelize.define('categories', {
         id: {
             type: DataType.INTEGER(11),
             primaryKey: true,
             autoIncrement: true,
         },
-        name: { type: DataType.STRING(255) },
-        url: { type: DataType.STRING(255) },
+        nameEn: { type: DataType.STRING(255) },
+        nameFr: { type: DataType.STRING(255) },
     });
 
-    return retailers;
+    return categories;
 };

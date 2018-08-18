@@ -1,3 +1,3 @@
-import db from '../db.js';
+import { models } from '../db.js';
 
-module.exports = db.models;
+module.exports = models;

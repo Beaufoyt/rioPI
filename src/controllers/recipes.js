@@ -1,9 +1,10 @@
-import { recipes, ingredients, inventory, retailers } from '../models';
-
-const Recipes = recipes;
-const Ingredients = ingredients;
-const Inventory = inventory;
-const Retailers = retailers;
+import {
+    recipes as Recipes,
+    ingredients as Ingredients,
+    inventory as Inventory,
+    retailers as Retailers,
+    categories as Category,
+} from '../models';
 
 module.exports = {
     fetchRecipes: (req, res) => {
@@ -17,6 +18,9 @@ module.exports = {
                             include: [
                                 {
                                     model: Retailers,
+                                },
+                                {
+                                    model: Category,
                                 },
                             ],
                         },
