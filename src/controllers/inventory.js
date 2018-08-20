@@ -33,12 +33,4 @@ module.exports = {
             res.send(recipes);
         });
     },
-    fetchCategories: async (req, res, next) => {
-        try {
-            const categories = await Category.findAll();
-            res.send(categories);
-        } catch (err) {
-            next(err);
-        }
-    },
 };
