@@ -1,36 +1,37 @@
 import {
-    recipes as Recipes,
-    ingredients as Ingredients,
     inventory as Inventory,
     retailers as Retailers,
     categories as Category,
 } from '../models';
 
-module.exports = {
-    fetchRecipes: (req, res) => {
-        const options = {
-            include: [
-                {
-                    model: Ingredients,
-                    include: [
-                        {
-                            model: Inventory,
-                            include: [
-                                {
-                                    model: Retailers,
-                                },
-                                {
-                                    model: Category,
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ],
-        };
+const fetchInventory = async (req, res, next) => {
+    let { categoryId } = req.query;
 
-        Recipes.findAll(options).then(recipes => {
-            res.send(recipes);
-        });
-    },
+    const options = {
+        where: {},
+        include: [
+            {
+                model: Retailers,
+            },
+            {
+                model: Category,
+            },
+        ],
+    };
+
+    if (categoryId) {
+        categoryId = categoryId === 'null' ? null : categoryId;
+        options.where.categoryId = categoryId;
+    }
+
+    try {
+        const inventory = await Inventory.findAll(options);
+        res.send(inventory);
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = {
+    fetchInventory,
 };
