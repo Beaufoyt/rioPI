@@ -1,5 +1,6 @@
-import { fetchInventory } from '../controllers/inventory.js';
+import { fetchInventory, toggleStock } from '../controllers/inventory.js';
 
 module.exports = (router) => {
     router.get('/inventory', fetchInventory);
+    router.put('/inventory/toggle-stock/:inventoryId', toggleStock);
 };
