@@ -5,6 +5,12 @@ import Sequelize from 'sequelize';
 import config from './config.js';
 
 const { host, user, password, database } = config.db;
+const operatorsAliases = {
+    $gt: Sequelize.Op.gt,
+    $lt: Sequelize.Op.lt,
+    $like: Sequelize.Op.like,
+    $or: Sequelize.Op.or,
+};
 let db = null;
 
 if (!db) {
@@ -14,7 +20,7 @@ if (!db) {
         dialect: 'mysql',
         pool: { maxConnections: 5, maxIdleTime: 30},
         language: 'en',
-        operatorsAliases: false,
+        operatorsAliases,
     });
 
     db = {
